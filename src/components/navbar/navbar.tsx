@@ -12,10 +12,10 @@ export const Navbar = () => {
 
   return (
     <header
-      className="sticky top-0 w-full flex z-30 border-b border-border/40
-      bg-background/90 backdrop-blur-xl font-semibold"
+      className="sticky top-0 w-full z-30 border-b border-border
+      bg-background/90 backdrop-blur-xl font-semibold "
     >
-      <nav className="container h-16 flex max-w-screen-xl items-center justify-between w-full">
+      <nav className="container h-16 flex items-center justify-between">
         <div className="flex gap-4 px-2">
           <Link
             className={cn(
