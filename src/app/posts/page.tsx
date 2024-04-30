@@ -9,8 +9,6 @@ export const metadata = {
 const PostsPage = () => {
   let allPosts = getBlogPosts();
 
-  console.log("🚀 ~ file: page.tsx:6 ~ PostsPage ~ allBlogs:", allPosts);
-
   return (
     <div className="container py-20 flex flex-col">
       <h1 className="text-3xl font-bold mb-8">My POSTS</h1>

@@ -15,6 +15,7 @@ const ProjectPage = async () => {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       Accept: "*/*",
     },
+    cache: "no-cache",
   });
 
   const repos: Array<IRepo> = await res.json();

@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 
 export const ToggleTheme = () => {
   const { setTheme, theme } = useTheme();
-  console.log("🚀 ~ file: theme-toggle.tsx:8 ~ ToggleTheme ~ themes:", theme);
 
   return (
     <Button variant="ghost" size={"icon"}>
