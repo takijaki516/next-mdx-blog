@@ -17,7 +17,6 @@ const ProjectPage = async () => {
     },
     cache: "no-cache",
   });
-
   const repos: Array<IRepo> = await res.json();
 
   return (
