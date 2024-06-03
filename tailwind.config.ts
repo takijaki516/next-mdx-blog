@@ -13,13 +13,13 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "4rem",
       screens: {
         sm: "400px",
         md: "600px",
-        lg: "800px",
-        xl: "1000px",
-        "2xl": "1000px",
+        lg: "750px",
+        xl: "750px",
+        "2xl": "800px",
       },
     },
     extend: {

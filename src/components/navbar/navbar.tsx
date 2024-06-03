@@ -12,8 +12,8 @@ export const Navbar = () => {
 
   return (
     <header
-      className="sticky top-0 w-full z-30 border-b border-border
-      bg-background/90 backdrop-blur-xl font-semibold "
+      className="sticky top-0 w-full z-30 border-b border-border/30
+      bg-background/70 backdrop-blur-xl font-semibold "
     >
       <nav className="container h-16 flex items-center justify-between">
         <div className="flex gap-4 px-2">

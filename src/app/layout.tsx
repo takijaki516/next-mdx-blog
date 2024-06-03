@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background antialiased")}>
+      <body
+        className={cn("min-h-screen bg-background antialiased flex flex-col")}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
