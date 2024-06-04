@@ -11,7 +11,7 @@ const PostsPage = () => {
 
   return (
     <div className="container py-20 flex flex-col">
-      <h1 className="text-3xl font-bold mb-8">My POSTS</h1>
+      <h1 className="text-3xl font-bold mb-8">POSTS!!</h1>
 
       <div className="flex flex-col space-y-4">
         {allPosts
