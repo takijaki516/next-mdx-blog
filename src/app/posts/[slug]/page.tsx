@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { CustomMDX } from "@/components/mdx/mdx";
 
 // TODO: add metadata
-
 const PostPage = ({
   params,
 }: {
@@ -13,6 +12,7 @@ const PostPage = ({
     slug: string;
   };
 }) => {
+  // TODO: implement get post by slug
   let post = getBlogPosts().find((post) => post.slug === params.slug);
 
   if (!post) {
