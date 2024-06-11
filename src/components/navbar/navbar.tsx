@@ -13,7 +13,7 @@ export const Navbar = () => {
   return (
     <header
       className="sticky top-0 w-full z-30 font-semibold 
-      border-b border-border/40 bg-background/95 backdrop-blur 
+      border-b border-border/40 bg-background/95 backdrop-blur-xl
       supports-[backdrop-filter]:bg-background/60
       "
     >

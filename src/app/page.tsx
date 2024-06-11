@@ -22,9 +22,7 @@ export default function Home() {
 
         <h2 className="pb-4 text-xl font-light">
           안녕하세요! 저는 양택민입니다. <br />
-          세상에 긍적적인 영향을 주는 소프트웨어를 만들 것입니다. <br />
-          AI를 활용한 서비스를 만들고 싶습니다. <br />
-          필요한 기술이라면 무엇이든 배울 것입니다.
+          세상에 긍적적인 영향을 주는 소프트웨어를 만들고 싶습니다! <br />
         </h2>
         <div className="bg-gradient-to-r from-secondary rounded-md px-2 py-1 ">
           <div className="text-xl font-semibold">Contacts</div>
