@@ -22,14 +22,14 @@ const PostPage = ({
   return (
     <div className="container py-10">
       <div className="flex justify-between items-center mb-10">
-        <h1 className="text-4xl font-medium">{post.metadata.title}</h1>
+        <h1 className="text-5xl font-extrabold">{post.metadata.title}</h1>
 
         <Suspense>
           <p className="text-muted-foreground">Date</p>
         </Suspense>
       </div>
 
-      <article>
+      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
         <CustomMDX source={post.content} />
       </article>
     </div>

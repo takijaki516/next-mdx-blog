@@ -8,6 +8,8 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./content/**/*.mdx",
+    "./public/**/*.svg",
   ],
   prefix: "",
   theme: {
@@ -77,7 +79,18 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      typography: {
+        quoteless: {
+          css: {
+            "blockquote p:first-of-type::before": { content: "none" },
+            "blockquote p:first-of-type::after": { content: "none" },
+          },
+        },
+      },
     },
+  },
+  future: {
+    hoverOnlyWhenSupported: true,
   },
   plugins: [require("tailwindcss-animate"), typography],
 } satisfies Config;
