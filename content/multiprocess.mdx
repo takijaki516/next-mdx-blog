@@ -1,0 +1,50 @@
+---
+title: 'multiprocess'
+publishedAt: '2024-05-01'
+summary: 'multiprocess에 대한 정리'
+---
+
+# multiprocess
+하나의 프로그램을 여러개의 프로세스로 구성하여 각 프로세스가 병렬적으로 작업을 수행하는 것
+providing a way to take advantage of multiple processors or cores for improved performance and scalability.
+
+## process
+program이 메모리에 올라가 있는 상태를 process라고 한다.
+process들은 독립적인 memory address space를 할당받는다.
+프로세스 메모리 공간은 4개의 구역으로 나뉜다. (code, data, heap, stack)
+자세한건 virtual memory(링크)를 참고하자.
+
+process에 execution entry point
+
+## 장점
+- 안정성 (메모리 침범 문제를 OS차원에서 해결)
+-- 여러 자식 프로세스 중 하나가 죽어도 다른 프로세스에는 영향을 미치지 않아, 정상적으로 수행된다.
+
+
+## 크롬 브라우저를 예시로 들어보면
+chorme에서 새탭을 열면 새로운 process가 생성된다.
+이부분을 보면 chrome은 multi process application이라고 말할 수 있다.
+하나의 탭에서는 여러 thread가 실행중이다. web api
+대표적으로 event loop를 실행중이 thread가 있다.
+
+
+
+한번 chorme에서 개발자 도구를 열고 `while(true) {console.log('loop start')}` 코드를 실행해보자.
+그렇다면 event loop가 block되서 tab이 멈출것이다.
+그럼에도 다른 
+
+
+
+## 단점
+- process는 태생적으로 thread에 비해 무겁다.
+- context switch 비용을 지불해야 한다.
+- IPC가 힘들다.
+
+## context switch
+프로세스의 상태 정보를 저장하고 복원하는 일련의 과정
+프로세스는 각 독립된 메모리 영역을 할당받아 사용되므로,
+캐시 메모리 초기화와 같은 무거운 작업이 진행되었을 때 오버헤드가 발생할 문제가 존재함
+
+
+## IPC
+

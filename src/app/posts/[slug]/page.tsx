@@ -29,7 +29,7 @@ const PostPage = ({
         </Suspense>
       </div>
 
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
+      <article className="prose prose-lg prose-quoteless prose-neutral dark:prose-invert ">
         <CustomMDX source={post.content} />
       </article>
     </div>

@@ -15,7 +15,12 @@ auto로 설정한 경우 부모로 부터 `z-index`값을 상속받는다.
 그러나 가끔식 `z-index`를 아무리 낮게 혹은 높게 설정해도 원하는 대로 동작하지 않는 경우가 있다.
 왜 이런 일이 발생하는지 알아보자!
 
+## default stacking order
+
+
 ## z-index는 position: static;로 설정된 경우 동작하지 않는다.
+position 을 갖고 있는 요소는 그것을 가지고 있지 않는 요소보다 앞에서 노출
+
 `position: static;`은 position속성의 default값이다.
 이 경우 `z-index`는 무시된다.
 
@@ -37,6 +42,8 @@ _출처_
 - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Understanding_z-index/Stacking_context 
 - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Understanding_z-index/Using_z-index
 - https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
-- https://dongmin-jang.medium.com/css-stacking-context-172f9bd1af8b
 - https://pozafly.github.io/css/stacking-context/
+
 - https://philipwalton.com/articles/what-no-one-told-you-about-z-index
+
+- https://www.freecodecamp.org/news/z-index-explained-how-to-stack-elements-using-css-7c5aa0f179b3

@@ -65,7 +65,14 @@ function createHeading(level: any) {
 }
 
 function RoundedImage(props: any) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />;
+  return (
+    <div className="relative">
+      <Image alt={props.alt} className="rounded-lg" {...props} />
+      <div className="absolute bottom-0 right-0 text-neutral-900">
+        {props.legend}
+      </div>
+    </div>
+  );
 }
 
 function Callout(props: any) {
