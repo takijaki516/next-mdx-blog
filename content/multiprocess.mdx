@@ -1,50 +1,124 @@
 ---
-title: 'multiprocess'
+title: 'multi process'
 publishedAt: '2024-05-01'
-summary: 'multiprocess에 대한 정리'
+summary: 'multi process에 대한 정리'
 ---
 
-# multiprocess
-하나의 프로그램을 여러개의 프로세스로 구성하여 각 프로세스가 병렬적으로 작업을 수행하는 것
-providing a way to take advantage of multiple processors or cores for improved performance and scalability.
+# multi process
+application는 주어진 task들을 정확하고 빠르게 실행해 목적을 달성해야 한다.  
+하나의 process만으로 task를 수행하는 것보다 process를 여러개 만들어 task를 수행하면 목적을 더 효율적으로 수행할 수 있을것이다.  
+multi process는 여러개의 프로세스로 구성하여 각 프로세스가 병렬적으로 task를 수행하는 것이다.
+
 
 ## process
-program이 메모리에 올라가 있는 상태를 process라고 한다.
-process들은 독립적인 memory address space를 할당받는다.
-프로세스 메모리 공간은 4개의 구역으로 나뉜다. (code, data, heap, stack)
-자세한건 virtual memory(링크)를 참고하자.
+c언어를 예시로 들어보자.  
+```c
+#include <stdio.h>
 
-process에 execution entry point
+int main() {
+    printf("Hello world!\n");
 
-## 장점
-- 안정성 (메모리 침범 문제를 OS차원에서 해결)
--- 여러 자식 프로세스 중 하나가 죽어도 다른 프로세스에는 영향을 미치지 않아, 정상적으로 수행된다.
+    return 0;
+}
+```
 
-
-## 크롬 브라우저를 예시로 들어보면
-chorme에서 새탭을 열면 새로운 process가 생성된다.
-이부분을 보면 chrome은 multi process application이라고 말할 수 있다.
-하나의 탭에서는 여러 thread가 실행중이다. web api
-대표적으로 event loop를 실행중이 thread가 있다.
+프로그래머가 c코드를 작성하고 컴파일해서 실행파일을 만들었다.  
+(실제 compile과정는 이렇게 간단하지는 않다. 전처리기, 어셈블러, 링커등 다양한 과정이 있다.)  
+이는 program이다.  아마도 program은 SSD 어딘가에 저장되어 있을 것이다.
 
 
+program이 메모리에 올라가 있는 상태를 process라고 한다.  
+OS는 program을 memory올리는 과정에서 process에게 독립적인 process address space를 할당한다.  
+<Image 
+    alt={`process address space`}
+    src={`/images/multiprocess/process-address-space.png`}
+    width={3840 / 8}
+    height={2160 / 8}
+    legend="그림1"
+/>
 
-한번 chorme에서 개발자 도구를 열고 `while(true) {console.log('loop start')}` 코드를 실행해보자.
-그렇다면 event loop가 block되서 tab이 멈출것이다.
-그럼에도 다른 
+**program이 메모리에 올라가 있는 상태를 process라고 한다.**
+
+## process에 execution entry point
+process가 뭔지 알았다.
+그런데 주어진 task를 수행해 목적을 달성하는 것이 application이다.
+task를 수행한다는 것은 컴퓨터가 계산을 한다는 것이고 계산은 CPU가 담당한다.
+그렇다면 CPU는 무엇을 어떻게 계산하고 이것이 process랑 무슨 관계가 있을까?
+
+앞으로 설명하는 것은 간략화 한 버전이다. 실제로 CPU는 더 정교하게 동작한다.
 
 
 
-## 단점
-- process는 태생적으로 thread에 비해 무겁다.
-- context switch 비용을 지불해야 한다.
-- IPC가 힘들다.
+## multi process
+가장 많이 사용되는 application중 하나인 브라우저를 예시로 들어보자.  
+동영상을 재생할시 영상을 render해야 하고, 음악을 재생할시 음악을 render해야 하고, 수시로 사용자와 상호작용도 해야 하고 network 통신도 해야 한다. 더욱이 이 모든것을 동시에 해야 한다.  
+process하나만 가지고도 작업을 수행할 수 있지만 process를 여러개 만들어 process들에게 작업을 전담시키면 더 효율적으로 작업을 수행할 수 있다.  
+process를 여러개 만들어 작업을 수행하는 것을 multi process라고 한다.  
+<Image
+    alt={`multi process application`}
+    src={`/images/multiprocess/multi-process-application.png`}
+    width={3840 / 5}
+    height={2160 / 5}
+    legend="그림2"
+/>
+*multi process대신 multi thread를 사용하는 것도 가능하고 더 효율적일수도 있지만 이 글 multi process에 관한 글이기 때문에 multi thread에 대해서는 다루지 않겠습니다.*  
+*multi thread에 대한 글은 다음 [링크]를 참고하세요.*  
+providing a way to take advantage of multiple processors or cores for improved performance and scalability.
 
-## context switch
+
+
+## virtual memory system / 가상 메모리 시스템
+서로 다른 프로세스의 주소 공간은 서로 격리되어 있으며, 가상 메모리 시스템은 매우 특별한 경우를 제외하고 다름 프로세스의 주소 공간에 속한 데이터에 직접 접근하지 못하도록 보장한다.  
+이는 process의 안정성을 보장한다. (메모리 침범 문제를 OS차원에서 해결)
+
+process address space은 4개의 구역으로 나뉜다.
+- **code segment:** code를 컴파일하여 생성된 기계명령어가 저장된다. read-only이므로 runtime에 수정될 수 없다.
+- **data segment:** 전역변수, 정적변수, 등이 저장된다.
+- **heap segment:** 동적할당시 사용. new(), malloc()
+- **stack segment:** 지역변수, 함수의 매개변수 
+
+독립적이기 때문에 어느 프로세스에서 process address space에 문제가 다른 프로세스에는 영향을 미치지 않아, 다른 프로세스들은 정상적으로 수행된다.  
+
+예시로 chrome에서 새탭을 열면 새로운 process가 생성된다.  
+이부분을 보면 chrome은 multi process application이라고 말할 수 있다.  
+다만 하나의 탭에서는 여러 thread가 실행중이다. 대표적으로 event loop를 실행중이 thread가 있다.  
+
+한번 chrome에서 개발자 도구를 열고 
+```javascript
+while (true) {
+    console.log('infinite loop start!')
+}
+```
+코드를 실행해보자.
+이 코드를 실행하면 event loop가 block되서 tab이 멈출것이다.  
+(브라우저가 동식하는 방식과 event loop에대한 설명은 다음 [링크]를 참고하세요)  
+그럼에도 다른 tab들은 정상적으로 동작한다.  
+tab들은 서로 다른 process이기 때문에 하나의 process의 오류가 다른 process에 영향을 미치지 않는것이다.
+
+
+
+## IPC (inter process communication)
+서로 다른 프로세스의 주소 공간은 서로 격리되어 있다는 점을 알았다.   
+그런데 process들이 서로 data를 주고받아야 하는 경우에는 어떻게 해야 할까?  
+이경우에는 pipe, UNIX socket, rpc 등이 존재 한다.
+<Image 
+    alt={`IPC pipe`}
+    src={`/images/multiprocess/pipe.png`}
+    width={3840 / 7}
+    height={2160 / 7}
+    legend="그림3"
+/>
+pipe에 대한 설명 추가
+
+## 동시성과 process의 context switch
+context switch 비용을 지불해야 한다.
 프로세스의 상태 정보를 저장하고 복원하는 일련의 과정
 프로세스는 각 독립된 메모리 영역을 할당받아 사용되므로,
 캐시 메모리 초기화와 같은 무거운 작업이 진행되었을 때 오버헤드가 발생할 문제가 존재함
 
 
-## IPC
 
+## 출처
+- 컴퓨터 밑바닥의 비밀
+- https://inpa.tistory.com/entry/%F0%9F%91%A9%E2%80%8D%F0%9F%92%BB-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%E2%9A%94%EF%B8%8F-%EC%93%B0%EB%A0%88%EB%93%9C-%EC%B0%A8%EC%9D%B4
+- https://lycos7560.com/etc/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%8A%A4%EB%A0%88%EB%93%9C-%EC%9C%A0%EB%8B%88%ED%8B%B0-%EC%BD%94%EB%A5%B4%ED%8B%B4/33841/
